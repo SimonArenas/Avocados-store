@@ -11,7 +11,7 @@ interface Navigation {
 
 const Navbar = ({ navigation }: Navbar) => {
   return (
-    <header className="bg-gray-50 mb-5">
+    <header className="bg-gray-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2" aria-label="Top">
         <div className="w-full py-4 flex items-center justify-between border-b border-indigo-500 lg:border-none">
           <div className="flex items-center">
@@ -32,7 +32,7 @@ const Navbar = ({ navigation }: Navbar) => {
                   className="flex-shrink-0 mr-2 h-6 w-6 text-gray-50 group-hover:text-gray-500"
                   aria-hidden="true"
                 />
-                My cart
+                My cart (0)
               </a>
             </Link>
           </div>

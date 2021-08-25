@@ -13,8 +13,7 @@ const Id: NextPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    window
-      .fetch(`/api/avocado/${id}`)
+    fetch(`/api/avocado/${id}`)
       .then((response) => response.json())
       .then(({ getAvocado }) => {
         updateProductDetail(getAvocado);

@@ -1,3 +1,4 @@
+import Hero from "components/Hero";
 import Spinner from "components/Loader";
 import ProductsList from "components/ProductsList";
 import type { NextPage } from "next";
@@ -27,7 +28,14 @@ const Home: NextPage = () => {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       {isLoading && <Spinner />}
-      <main>{!isLoading && <ProductsList products={productList} />}</main>
+      <main>
+        {!isLoading && (
+          <>
+            <Hero />
+            <ProductsList products={productList} />
+          </>
+        )}
+      </main>
     </div>
   );
 };

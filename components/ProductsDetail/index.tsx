@@ -14,6 +14,7 @@ type Producto = {
   name: string;
   image: string;
   price: number;
+  sku: string;
   attributes: Attributes;
 };
 type Attributes = {
@@ -81,10 +82,13 @@ const ProductsDetail: FC<ProductDetail> = ({ producto }) => {
             </ol>
           </nav>
 
-          <div className="mt-4">
+          <div className="mt-4 flex items-center justify-between">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               {producto.name}
             </h1>
+            <p className="text-xs text-gray-500 mt-1 bg-gray-100 inline-block p-1 rounded-md">
+              SKU: {producto.sku}
+            </p>
           </div>
 
           <section aria-labelledby="information-heading" className="mt-4">

@@ -32,9 +32,9 @@ const ProductsList: FC<ProductList> = ({ products }) => {
                     layout="fill"
                   />
                 </div>
-                <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-                <p className="mt-1 text-lg font-medium text-gray-900">
-                  ${product.price}
+                <h3 className="mt-4 text-sm text-gray-700 font-semibold">{product.name}</h3>
+                <p className="mt-1 text-lg font-medium text-primaryColor">
+                  $ {product.price}
                 </p>
               </a>
             </Link>
