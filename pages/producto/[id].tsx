@@ -9,7 +9,7 @@ const Id: NextPage = () => {
     query: { id },
   } = useRouter();
 
-  const [productDetail, updateProductDetail] = useState([]);
+  const [productDetail, updateProductDetail] = useState<TProduct | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,7 +24,6 @@ const Id: NextPage = () => {
   return (
     <>
       {isLoading && <Spinner />}
-
       {!isLoading && productDetail && (
         <ProductsDetail producto={productDetail} />
       )}
