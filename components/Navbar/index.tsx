@@ -1,4 +1,5 @@
 import { ShoppingCartIcon } from "@heroicons/react/outline";
+import Image from "next/image";
 import Link from "next/link";
 interface Navbar {
   navigation?: Navigation[];
@@ -17,8 +18,13 @@ const Navbar = ({ navigation }: Navbar) => {
           <div className="flex items-center">
             <Link href="/">
               <a className="flex items-end">
-                {/* <span className="sr-only">Workflow</span> */}
-                <img className="h-10 w-auto" src="/images/logo.png" alt="" />
+                <Image
+                  className="h-10 w-auto"
+                  src="/images/logo.png"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
                 <span className="text-3xl font-medium text-gray-700 hover:text-gray-900">
                   vocado
                 </span>
