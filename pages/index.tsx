@@ -1,24 +1,16 @@
 import Hero from "components/Hero";
-import Spinner from "components/Loader";
 import ProductsList from "components/ProductsList";
-import type { NextPage } from "next";
+import { server } from "config";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 
-const Home: NextPage = () => {
-  const [productList, updateProductList] = useState([]);
-  const [isLoading, updateIsLoading] = useState(true);
+export const getStaticProps = async () => {
+  const response = await fetch(`${server}/api/avocado`);
+  const { allAvocados: productList } = await response.json();
 
-  useEffect(() => {
-    window
-      .fetch("/api/avocado")
-      .then((response) => response.json())
-      .then(({ allAvocados }) => {
-        updateProductList(allAvocados);
-        updateIsLoading(false);
-      });
-  }, []);
+  return { props: { productList } };
+};
 
+const Home = ({ productList }: { productList: TProduct[] }) => {
   return (
     <div>
       <Head>
@@ -27,14 +19,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
-      {isLoading && <Spinner />}
       <main>
-        {!isLoading && (
-          <>
-            <Hero />
-            <ProductsList products={productList} />
-          </>
-        )}
+        <>
+          <Hero />
+          <ProductsList products={productList} />
+        </>
       </main>
     </div>
   );

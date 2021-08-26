@@ -1,34 +1,34 @@
-import Spinner from "components/Loader";
 import ProductsDetail from "components/ProductsDetail";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { server } from "config";
+import { GetStaticProps } from "next";
 
-const Id: NextPage = () => {
-  const {
-    query: { id },
-  } = useRouter();
+export const getStaticPaths = async () => {
+  const response = await fetch(`${server}/api/avocado`);
+  const { allAvocados: productList } = await response.json();
 
-  const [productDetail, updateProductDetail] = useState<TProduct | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const paths = productList.map(({ id }: any) => ({
+    params: {
+      id,
+    },
+  }));
 
-  useEffect(() => {
-    fetch(`/api/avocado/${id}`)
-      .then((response) => response.json())
-      .then(({ getAvocado }) => {
-        updateProductDetail(getAvocado);
-        setIsLoading(false);
-      });
-  }, [id]);
-
-  return (
-    <>
-      {isLoading && <Spinner />}
-      {!isLoading && productDetail && (
-        <ProductsDetail producto={productDetail} />
-      )}
-    </>
-  );
+  return {
+    paths,
+    // Incremental static generation
+    // fallback false -> cualquier pagina que no se espcifique en los paths, dará un 404
+    fallback: true,
+  };
 };
 
-export default Id;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const response = await fetch(`${server}/api/avocado/${params?.id}`);
+  const { getAvocado: productDetail } = await response.json();
+
+  return { props: { productDetail } };
+};
+
+const ProductPage = ({ productDetail }: { productDetail: TProduct }) => {
+  return <>{productDetail && <ProductsDetail producto={productDetail} />}</>;
+};
+
+export default ProductPage;
